@@ -1,0 +1,106 @@
+[workspace]
+members = [
+    "crates/api",
+    "crates/core",
+    "crates/db",
+    "crates/cache",
+    "crates/types",
+    "crates/sdk",
+    "crates/cli",
+    "crates/ffi",
+    "bindings/python",
+]
+resolver = "2"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+authors = ["Blaniel AI Team"]
+license = "MIT"
+
+[workspace.dependencies]
+# Async runtime
+tokio = { version = "1.35", features = ["full"] }
+
+# Web framework
+axum = { version = "0.7", features = ["macros"] }
+tower = { version = "0.4", features = ["full"] }
+tower-http = { version = "0.5", features = ["cors", "compression-gzip", "trace"] }
+
+# Serialization
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+# Database
+sqlx = { version = "0.8", features = ["runtime-tokio-rustls", "postgres", "uuid", "chrono", "json"] }
+
+# Cache
+redis = { version = "0.24", features = ["tokio-comp", "connection-manager"] }
+lru = "0.12"
+
+# Auth
+jsonwebtoken = "9.2"
+hmac = "0.12"
+sha2 = "0.10"
+hex = "0.4"
+
+# HTTP client
+reqwest = { version = "0.11", features = ["json", "rustls-tls", "stream"] }
+
+# Security
+secrecy = { version = "0.8", features = ["serde"] }
+
+# Concurrent data structures
+arc-swap = "1.7"
+dashmap = "5.5"
+parking_lot = "0.12"
+
+# URL parsing
+url = "2"
+
+# Logging/Tracing
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "json"] }
+
+# Metrics
+prometheus = "0.13"
+
+# Error handling
+thiserror = "1.0"
+anyhow = "1.0"
+
+# Utilities
+uuid = { version = "1.6", features = ["v4", "serde"] }
+ulid = "1.1"
+chrono = { version = "0.4", features = ["serde"] }
+rand = "0.8"
+futures = "0.3"
+tokio-stream = "0.1"
+
+# Pathfinding
+priority-queue = "1.3"
+
+# Regex
+regex = "1"
+once_cell = "1.19"
+
+# Benchmarking
+criterion = { version = "0.5", features = ["html_reports"] }
+
+# Validation
+validator = { version = "0.18", features = ["derive"] }
+
+# Environment
+dotenvy = "0.15"
+
+# CLI dependencies
+clap = { version = "4", features = ["derive"] }
+colored = "2"
+dialoguer = "0.11"
+indicatif = "0.17"
+
+# FFI
+cbindgen = "0.26"
+
+# Python bindings
+pyo3 = { version = "0.23", features = ["extension-module"] }

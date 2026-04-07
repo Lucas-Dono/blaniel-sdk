@@ -1,0 +1,17 @@
+[package]
+name = "npc-cache"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+tokio.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+redis.workspace = true
+lru.workspace = true
+thiserror.workspace = true
+tracing.workspace = true
+parking_lot.workspace = true
+futures.workspace = true
+
+npc-types = { path = "../types" }

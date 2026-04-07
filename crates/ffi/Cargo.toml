@@ -1,0 +1,21 @@
+[package]
+name = "blaniel-ffi"
+version.workspace = true
+edition.workspace = true
+description = "C FFI bindings for Blaniel NPC SDK - integrate AI NPCs into Unity, Unreal, Godot"
+license = "MIT"
+repository = "https://github.com/blaniel/rust-npc-api"
+links = "blaniel"
+
+[lib]
+crate-type = ["cdylib", "staticlib"]
+
+[dependencies]
+blaniel-sdk = { path = "../sdk" }
+npc-types = { path = "../types" }
+tokio = { workspace = true, features = ["rt-multi-thread"] }
+serde.workspace = true
+serde_json.workspace = true
+
+[build-dependencies]
+cbindgen = "0.26"

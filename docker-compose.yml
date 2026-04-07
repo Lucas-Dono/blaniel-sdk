@@ -1,0 +1,81 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: npc-api-postgres
+    environment:
+      POSTGRES_USER: ${DB_USER:-blaniel}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-blaniel_dev}
+      POSTGRES_DB: ${DB_NAME:-blaniel}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./scripts/init-db.sql:/docker-entrypoint-initdb.d/001-init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-blaniel}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - npc-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: npc-api-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes --maxmemory 256mb --maxmemory-policy allkeys-lru
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - npc-network
+
+  npc-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: npc-api
+    environment:
+      DATABASE_URL: postgresql://${DB_USER:-blaniel}:${DB_PASSWORD:-blaniel_dev}@postgres:5432/${DB_NAME:-blaniel}
+      REDIS_URL: redis://redis:6379
+      JWT_SECRET: ${JWT_SECRET:-dev-jwt-secret-change-in-production}
+      NEXTJS_API_URL: ${NEXTJS_API_URL:-http://host.docker.internal:3000}
+      NEXTJS_API_KEY: ${NEXTJS_API_KEY:-dev-api-key}
+      PORT: 3001
+      RUST_LOG: ${RUST_LOG:-info,npc_api=debug}
+      MEMORY_CACHE_SIZE: ${MEMORY_CACHE_SIZE:-1000}
+      DB_POOL_MAX_CONNECTIONS: ${DB_POOL_MAX_CONNECTIONS:-50}
+      DB_POOL_MIN_CONNECTIONS: ${DB_POOL_MIN_CONNECTIONS:-10}
+    ports:
+      - "${PORT:-3001}:3001"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3001/api/v1/health"]
+      interval: 30s
+      timeout: 5s
+      start_period: 15s
+      retries: 3
+    networks:
+      - npc-network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+
+networks:
+  npc-network:
+    driver: bridge

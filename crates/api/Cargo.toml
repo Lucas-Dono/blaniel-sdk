@@ -1,0 +1,64 @@
+[package]
+name = "npc-api"
+version.workspace = true
+edition.workspace = true
+
+[features]
+default = []
+integration-tests = []
+
+[[bin]]
+name = "npc-api"
+path = "src/main.rs"
+
+[dependencies]
+tokio.workspace = true
+axum.workspace = true
+tower.workspace = true
+tower-http.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+anyhow.workspace = true
+tracing.workspace = true
+tracing-subscriber.workspace = true
+jsonwebtoken.workspace = true
+dotenvy.workspace = true
+hmac.workspace = true
+sha2.workspace = true
+hex.workspace = true
+prometheus.workspace = true
+chrono.workspace = true
+validator.workspace = true
+futures.workspace = true
+uuid.workspace = true
+url.workspace = true
+
+npc-types = { path = "../types" }
+npc-cache = { path = "../cache" }
+npc-db = { path = "../db" }
+npc-core = { path = "../core" }
+sqlx.workspace = true
+tokio-stream = "0.1"
+
+[[bench]]
+name = "pathfinding"
+harness = false
+path = "../../benches/pathfinding.rs"
+
+[[bench]]
+name = "performance"
+harness = false
+path = "../../benches/performance.rs"
+
+[[bench]]
+name = "ai_providers"
+harness = false
+path = "../../benches/ai_providers.rs"
+required-features = ["integration-tests"]
+
+[dev-dependencies]
+criterion.workspace = true
+tower = { version = "0.4", features = ["util"] }
+axum = { version = "0.7", features = ["macros"] }
+http-body-util = "0.1"

@@ -1,0 +1,18 @@
+[package]
+name = "blaniel-python"
+version.workspace = true
+edition.workspace = true
+description = "Python bindings for Blaniel NPC SDK - integrate AI NPCs into Python games (Pygame, etc.)"
+license = "MIT"
+
+[lib]
+name = "blaniel"
+crate-type = ["cdylib"]
+
+[dependencies]
+blaniel-sdk = { path = "../../crates/sdk" }
+npc-types = { path = "../../crates/types" }
+tokio = { workspace = true, features = ["rt-multi-thread"] }
+serde.workspace = true
+serde_json.workspace = true
+pyo3 = { version = "0.23", features = ["extension-module"] }

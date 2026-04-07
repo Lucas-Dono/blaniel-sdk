@@ -1,0 +1,24 @@
+[package]
+name = "blaniel-sdk"
+version.workspace = true
+edition.workspace = true
+description = "Official SDK for the Blaniel NPC API - create, configure and interact with AI-powered NPCs"
+license = "MIT"
+repository = "https://github.com/blaniel/rust-npc-api"
+keywords = ["npc", "ai", "game", "blaniel", "sdk"]
+categories = ["game-development", "api-bindings"]
+
+[dependencies]
+npc-types = { path = "../types" }
+tokio.workspace = true
+reqwest = { workspace = true, features = ["json", "rustls-tls"] }
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+chrono.workspace = true
+secrecy.workspace = true
+
+[features]
+default = []
+full = ["streaming"]
+streaming = ["reqwest/stream"]

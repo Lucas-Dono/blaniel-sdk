@@ -1,0 +1,29 @@
+[package]
+name = "npc-core"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+tokio.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+tracing.workspace = true
+reqwest.workspace = true
+anyhow.workspace = true
+chrono.workspace = true
+rand.workspace = true
+futures.workspace = true
+priority-queue.workspace = true
+ulid.workspace = true
+secrecy.workspace = true
+arc-swap.workspace = true
+dashmap.workspace = true
+
+npc-types = { path = "../types" }
+npc-cache = { path = "../cache" }
+npc-db = { path = "../db" }
+regex.workspace = true
+once_cell.workspace = true
+lru.workspace = true
+tokio-stream.workspace = true
