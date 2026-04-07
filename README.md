@@ -1,6 +1,8 @@
 # Blaniel NPC API
 
-Open-source Rust microservice for integrating AI-powered NPCs into any game. Provides a high-performance REST API with emotions, pathfinding, dialogue, and configurable actions — designed to work with the [Blaniel](https://blaniel.com) platform or any OpenAI-compatible backend.
+Open-source Rust microservice for integrating AI-powered NPCs into any game. Provides a high-performance REST API with emotions, pathfinding, dialogue, and configurable actions — designed to work with the [Blaniel](https://github.com/Lucas-Dono/blaniel) platform or any OpenAI-compatible backend.
+
+> **Note:** This is part of [Blaniel](https://github.com/Lucas-Dono/blaniel), a one-person open-source project. If you find it useful, consider [supporting its development](https://tecito.app/blaniel).
 
 ## Features
 
@@ -639,6 +641,17 @@ For in-depth information, see the [docs/](docs/) directory:
 - **[docs/PERFORMANCE.md](docs/PERFORMANCE.md)** - Performance benchmarks, tuning, and troubleshooting
 - **[docs/ACTION-SYSTEM.md](docs/ACTION-SYSTEM.md)** - Complete AI action system guide with analytics, priorities, cooldowns, templates, and composite actions
 
+## Author
+
+**Lucas Dono** — Computer Science student from Argentina. Solo developer of the entire Blaniel ecosystem.
+
+- Email: [lucasdono332@gmail.com](mailto:lucasdono332@gmail.com)
+- LinkedIn: [linkedin.com/in/lucas-dono](https://www.linkedin.com/in/lucas-dono)
+- GitHub: [@Lucas-Dono](https://github.com/Lucas-Dono)
+- Support: [tecito.app/blaniel](https://tecito.app/blaniel)
+
 ## License
 
-MIT
+Apache 2.0 — see [LICENSE](LICENSE).
+
+Copyright (c) 2024-2026 Lucas Dono
